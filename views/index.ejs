@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <h1 class="header">Welcome to the least effort Blog</h1>
+    <h1>List of blog posts:</h1>
+    <ul>
+    <% posts.forEach(post => { %>
+    <li><a href='./article/<%= post.id %>' ><%= post.title %></a></li>
+    <% });  %>
+    </ul>
+    
+    
+  </body>
+</html>
