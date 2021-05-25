@@ -3,10 +3,15 @@ var router = express.Router();
 var path = require("path");
 var fs = require("fs");
 const matter = require("gray-matter");
+const helper = require('./helper')
+const Review = require('./classes/Review')
+const Post = require('./classes/Post')
 const posts = [];
 const reviews = [];
 
-const postDir = fs.readdirSync(path.resolve(__dirname, "../posts"));
+// takes in a path, and iterates through every path, and push  into a posts array
+
+/* const postDir = fs.readdirSync(path.resolve(__dirname, "../posts"));
 postDir.forEach((post) => {
   const postData = matter.read(path.resolve(__dirname, `../posts/${post}`));
   posts.push({
@@ -14,20 +19,11 @@ postDir.forEach((post) => {
     slug: postData.data.slug,
     id: postData.data.id,
   });
-});
+}); */
 
-const reviewDir = fs.readdirSync(path.resolve(__dirname, "../reviews"));
-console.log(reviewDir);
-reviewDir.forEach((review) => {
-  const reviewData = matter.read(
-    path.resolve(__dirname, `../reviews/${review}`)
-  );
-  console.log(reviewData);
-  reviews.push({
-    title: reviewData.data.title,
-    isbn: reviewData.data.isbn,
-  });
-});
+helper.pathExtractor("../posts",posts,Post)
+
+helper.pathExtractor("../reviews",reviews,Review)
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
